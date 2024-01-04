@@ -1,0 +1,122 @@
+How to Run a Python Script using Docker?
+
+Dockerfile Instruction
+
+There is an Docker syntax that you need to follow while writting the dockerfile as shown below:
+
+INSTRUCTION arguments
+
+Most frequently used instructions in dockerfile are as follows:
+
+FROM
+RUN
+ADD
+ENV
+ENTRYPOINT
+CMD
+
+This are the some of the instructions which are regularly used in dockerfile to know more about the syntax of dockerfile refer to What is Dockerfile Syntax?.
+
+Docker Commands
+
+Docker commands make your work easier which will help you to manage the docker containers like removing containers, running docker image as an container,and managing the containers and so on some of the most commonly used docker commands are.
+
+docker run
+docker ps
+docker stop
+docker rm
+docker images
+docker pull
+
+To know more about docker commands refer to the Docker – Instruction Commands.
+
+Installing Docker
+
+To run docker container first you need to install docker in your local machine you can install docker in different operating systems
+
+For Windows: How to Install Docker on Windows?
+
+For macOS: How to Install Docker on MacOS?
+
+For Linux/UNIX: How To Install and Configure Docker in Ubuntu?
+
+Creating Dockerfile For Python Application
+
+Step 1: Creating the Files and Folders
+
+We will be creating a Folder docker_2 at the desktop location in our PC . Inside the Folder another Folder called docker_assignment is created. Then two files dockerfile and test.py are created in this folder.
+
+
+Step 2: Creating the Dockerfile
+Inside the dockerfile we will start by first taking the python base image from docker hub. A tag latest is used to get the latest official python image. It is very important to set your working directory inside your container. I have chosen /usr/src/app. All commands will be executed here as well as the images will be copied here only.
+
+I have then copied the test.py file from my pc to the container current working directory(./ or /usr/src/app)  by using the COPY command. 
+
+#Deriving the latest base image
+FROM python:latest
+
+
+#Labels as key value pair
+LABEL Maintainer="roushan.me17"
+
+
+# Any working directory can be chosen as per choice like '/' or '/home' etc
+# i have chosen /usr/app/src
+WORKDIR /usr/app/src
+
+#to COPY the remote file at working directory in container
+COPY test.py ./
+# Now the structure looks like this '/usr/app/src/test.py'
+
+
+#CMD instruction should be used to run the software
+#contained by your image, along with any arguments.
+
+CMD [ "python", "./test.py"]
+
+
+
+Build The Docker Image For Python Application
+
+Step 1: Building the Docker Container
+After you have created both the Python script and the Dockerfile, you can now use the Docker build command to build your Docker Image.
+
+Here -t is for adding tags so as to identify your image easily.
+
+Step 2: Verify the Image Build
+
+After you have built your Docker Image, you can list all the Images to check whether your image has been successfully built or not.
+
+docker images
+
+
+You will find your Image name listed here and with the tag name, you can easily find it.
+
+docker image build -t python:0.0.1 /home/roushan/Desktop/docker_2/docker_assignment
+
+Run The Docker Container For Python Docker Image
+
+Step 1: Running the Docker Container
+
+Now, you can use the Docker run command to run your Docker Container.
+
+docker run python:0.0.1
+
+
+After running the Docker Container, you will see the output printed after adding the two numbers.
+
+Conclusion
+
+  how to build a simple addition Python script and run it inside the Docker Container.
+
+FAQs On Running Python Application Using Docker
+
+1. Can I Run An Application On Docker?
+
+Yes you can run you application by using docker by using docker image and docker run command.
+
+2.Can Docker Run A GUI?
+We can easily run the most common GUI applications without getting into trouble inside a Docker Container.
+
+3. Is Docker Only For Web Apps?
+You can run any type of application as an container using docker. It is well suited for micro service applications
